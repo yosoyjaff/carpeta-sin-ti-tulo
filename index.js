@@ -8,16 +8,16 @@ const port = 3441;
 
 const minioClient = new Minio.Client({
 	endPoint: process.env.MINIO_ENDPOINT,
-	useSSL: process.env.MINIO_SSL === 'true',
+	useSSL: process.env.MINIO_USE_SSL === 'true',
 	accessKey: process.env.MINIO_ACCESS_KEY,
 	secretKey: process.env.MINIO_SECRET_KEY,
+	region: 'us-east-1',
 });
-
 const endPoint = process.env.MINIO_ENDPOINT;
 const upload = multer({
 	storage: multer.memoryStorage(),
 	limits: {
-		fileSize: 10 * 1024 * 1024, 
+		fileSize: 10 * 1024 * 1024,
 	},
 });
 // Función para generar un nombre de archivo único
@@ -63,9 +63,8 @@ app.post('/api/catalogo/subirImagenCms', upload.single('file'), async (req, res)
 
 		const fileUrl = `https://${endPoint}/${bucketName}/${fullObjectName}`;
 
+		console.log(`✅ Archivo subido: ${fileUrl}`);
 
-        console.log(`✅ Archivo subido: ${fileUrl}`);
-        
 		return res.status(200).json({
 			error: false,
 			msg: 'Archivo subido exitosamente',
