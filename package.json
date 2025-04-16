@@ -1,0 +1,19 @@
+{
+  "name": "dd",
+  "version": "1.0.0",
+  "description": "",
+  "main": "minio-upload.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "crypto-js": "^4.2.0",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "minio": "^8.0.5",
+    "multer": "^1.4.5-lts.2"
+  }
+}
